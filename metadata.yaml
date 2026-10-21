@@ -1,0 +1,38 @@
+name: deepseek_search_scope
+display_name: DeepSeek 搜索范围限制
+short_desc: 限制 DeepSeek 网页搜索与网页提取只允许查询指定网站
+desc: |
+  # DeepSeek 搜索范围限制
+
+  限制 AstrBot 内置的 DeepSeek 网页搜索范围，指定只允许（或禁止）查询哪些网站。
+
+  ## 功能
+
+  - 搜索查询注入 `site:` / `-site:` 操作符，由 DeepSeek 搜索引擎在源头限定范围；
+  - 对搜索结果按域名二次过滤（双保险），并重新编号来源引用，保证引用编号与来源一一对应；
+  - 限制网页正文提取（deepseek_fetch_web_page），越界 URL 直接拒绝，不消耗 API 请求。
+
+  ## 使用方法
+
+  1. 在 AstrBot WebUI 的 `配置文件 → AI → 能力 → 网页搜索` 中启用网页搜索，
+     提供商选择 `DeepSeek Search API` 并填写 Key（需要 AstrBot >= 4.29.1）；
+  2. 安装本插件，打开插件「配置」；
+  3. 选择白名单/黑名单模式，填写域名列表（每行一个，如 `docs.astrbot.app`、`github.com`），保存。
+
+  域名条目可以直接粘贴完整网址，插件会自动提取域名；
+  条目默认同时匹配其子域名（如 `github.com` 也匹配 `docs.github.com`）。
+
+  ## 说明
+
+  - 白名单模式下列表为空 = 不限制；黑名单模式下列表为空 = 不拦截任何网站；
+  - 查询注入受 DeepSeek Search API 的 query 128 字符上限约束，超长时自动裁剪原查询，
+    无论注入是否成功，结果过滤都会兜底；
+  - 本插件仅作用于 DeepSeek 提供商，切换到其他搜索提供商时不生效。
+version: 1.0.0
+author: Arcueid
+repo: https://github.com/arcueid-x/deepseek_search_scope
+astrbot_version: ">=4.29.1"
+tags:
+  - search
+  - websearch
+  - deepseek

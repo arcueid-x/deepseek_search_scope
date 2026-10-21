@@ -1,0 +1,46 @@
+{
+  "enable": {
+    "description": "启用插件",
+    "hint": "关闭后不进行任何拦截，行为与未安装本插件一致。",
+    "type": "bool",
+    "default": true
+  },
+  "mode": {
+    "description": "限制模式",
+    "hint": "白名单：只允许搜索/提取列表中的网站；黑名单：禁止列表中的网站。",
+    "type": "string",
+    "default": "whitelist",
+    "options": ["whitelist", "blacklist"],
+    "labels": ["白名单（只允许以下网站）", "黑名单（禁止以下网站）"]
+  },
+  "sites": {
+    "description": "域名列表",
+    "hint": "每行一个域名，如 docs.astrbot.app、github.com。可直接粘贴完整网址，插件会自动提取域名；条目同时匹配其子域名（如 github.com 也匹配 docs.github.com）。",
+    "type": "list",
+    "default": []
+  },
+  "restrict_search": {
+    "description": "注入 site: 操作符限制搜索查询",
+    "hint": "在查询中追加 site:/-site: 操作符，由 DeepSeek 搜索引擎在源头限定搜索范围。",
+    "type": "bool",
+    "default": true
+  },
+  "filter_results": {
+    "description": "过滤搜索结果",
+    "hint": "对返回的搜索结果按域名二次过滤并重新编号引用（双保险，建议开启）。",
+    "type": "bool",
+    "default": true
+  },
+  "restrict_fetch": {
+    "description": "限制网页正文提取",
+    "hint": "使用 deepseek_fetch_web_page 提取正文时校验域名，越界直接拒绝，不消耗 API 请求。",
+    "type": "bool",
+    "default": true
+  },
+  "allow_subdomains": {
+    "description": "域名条目同时匹配其子域名",
+    "hint": "开启后，填写 example.com 也允许 www.example.com、docs.example.com 等子域名。",
+    "type": "bool",
+    "default": true
+  }
+}
